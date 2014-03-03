@@ -42,12 +42,12 @@ data = boleta
       aLista -> start = posicionador;
     }
   //Insertar al Final FALTA FALTA FALTA
-    void InsertarAlFinAL( lista *aLista , int boleta ){
+    void InsertarAlFinal( lista *aLista , int boleta ){
       nodoAlumno *posicionador;
       posicionador = malloc( sizeof( nodoAlumno ));
       posicionador -> boleta = boleta;
-      posicionador -> sigAlumno = aLista -> start;
-      aLista -> star = posicionador;
+      posicionador -> sigAlumno = NULL;
+      //poner el while con iterador despues i-> sigAlum = posicionador
     }
   //Imprimir Lista
     void ImprimirLista ( lista *aLista ){
@@ -64,9 +64,15 @@ int main(){
   lista MiLista;
   InicializarLista( &MiLista );
 
-  for (x = 0; x < 6; ++x){
+ /* for (x = 0; x < 6; ++x){
     InsertarAlInicio(&MiLista, x);
   }
 
   ImprimirLista(&MiLista); 
+*/
+  for (x = 0; x < 6; ++x){
+    InsertarAlFinal(&MiLista, x);
+  }
+  ImprimirLista(&MiLista); 
+
 }
