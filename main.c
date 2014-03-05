@@ -25,6 +25,24 @@
     void EliminarListaCompleta( Lista *aLista );
 
 //Funciones
+  //Comparar Listas
+    int compararListas(nodoAlumno* lista1,nodoAlumno*lista2){
+    int val=1;
+    nodoAlumno* iterador1=lista1;
+    nodoAlumno* iterador2=lista2;
+    while(iterador1!=NULL && iterador2!=NULL){
+      if(iterador1->boleta!=iterador2->boleta){
+        val=0;
+        break;
+      }
+      iterador1=iterador1->sigAlumno;
+      iterador2=iterador2->sigAlumno;
+    }
+    if((iterador1!=NULL && iterador2==NULL)||(iterador1==NULL && iterador2!=NULL)){
+      val=0;
+    }
+    return val;
+    }
   //Concatenar
     nodoAlumno* concatenar(nodoAlumno* lista1 , nodoAlumno*lista2, int orden){
     if(orden==1){
@@ -93,6 +111,49 @@
       }
       return posicionador;
     }
+  //Intercalar Nodos
+    nodoAlumno* intercalarNodos(nodoAlumno* lista1,nodoAlumno* lista2){
+    nodoAlumno* iterador1=lista1;
+    nodoAlumno* iterador2=lista2;
+    nodoAlumno* lista3=NULL;  
+    lista3=malloc( sizeof( nodoAlumno ));
+    
+    if(iterador1!=NULL){
+      lista3->boleta=iterador1->boleta;
+      iterador1=iterador1->sigAlumno;
+    }else{
+      if(iterador2!=NULL){
+        lista3->boleta=iterador2->boleta;
+        iterador2=iterador2->sigAlumno;
+      }
+    }
+    lista3->sigAlumno=NULL;
+    nodoAlumno* iterador3;
+    iterador3=lista3;
+    while(iterador1!=NULL || iterador2!=NULL){
+      
+      
+      if(iterador2!=NULL){
+        iterador3->sigAlumno=malloc( sizeof( nodoAlumno )); 
+        iterador3=iterador3->sigAlumno;
+        iterador3->boleta=iterador2->boleta;
+        iterador2=iterador2->sigAlumno;
+        iterador3->sigAlumno=NULL;
+        
+      }
+      if(iterador1!=NULL){
+        iterador3->sigAlumno=malloc( sizeof( nodoAlumno ));
+        iterador3=iterador3->sigAlumno;
+        iterador3->boleta=iterador1->boleta;
+        iterador1=iterador1->sigAlumno;
+        iterador3->sigAlumno=NULL;
+      }
+      
+      
+      
+      }
+    return lista3;
+      }
   //Invertir Lista
     void invertirLista(nodoAlumno*lista, Lista *aLista){
       nodoAlumno *iterador=lista;
@@ -129,76 +190,6 @@
         free(posicionador);
       }
     }
-//ERUBEY
-
-
-
-
-  //Comparar Listas
-  int compararListas(nodoAlumno* lista1,nodoAlumno*lista2){
-  int val=1;
-  nodoAlumno* iterador1=lista1;
-  nodoAlumno* iterador2=lista2;
-  while(iterador1!=NULL && iterador2!=NULL){
-    if(iterador1->boleta!=iterador2->boleta){
-      val=0;
-      break;
-    }
-    iterador1=iterador1->sigAlumno;
-    iterador2=iterador2->sigAlumno;
-  }
-  if((iterador1!=NULL && iterador2==NULL)||(iterador1==NULL && iterador2!=NULL)){
-    val=0;
-  }
-  return val;
-}
-  //INtercalar Nodos
-  nodoAlumno* intercalarNodos(nodoAlumno* lista1,nodoAlumno* lista2){
-  nodoAlumno* iterador1=lista1;
-  nodoAlumno* iterador2=lista2;
-  nodoAlumno* lista3=NULL;  
-  lista3=malloc( sizeof( nodoAlumno ));
-  
-  if(iterador1!=NULL){
-    lista3->boleta=iterador1->boleta;
-    iterador1=iterador1->sigAlumno;
-  }else{
-    if(iterador2!=NULL){
-      lista3->boleta=iterador2->boleta;
-      iterador2=iterador2->sigAlumno;
-    }
-  }
-  lista3->sigAlumno=NULL;
-  nodoAlumno* iterador3;
-  iterador3=lista3;
-  while(iterador1!=NULL || iterador2!=NULL){
-    
-    
-    if(iterador2!=NULL){
-      iterador3->sigAlumno=malloc( sizeof( nodoAlumno )); 
-      iterador3=iterador3->sigAlumno;
-      iterador3->boleta=iterador2->boleta;
-      iterador2=iterador2->sigAlumno;
-      iterador3->sigAlumno=NULL;
-      
-    }
-    if(iterador1!=NULL){
-      iterador3->sigAlumno=malloc( sizeof( nodoAlumno ));
-      iterador3=iterador3->sigAlumno;
-      iterador3->boleta=iterador1->boleta;
-      iterador1=iterador1->sigAlumno;
-      iterador3->sigAlumno=NULL;
-    }
-    
-    
-    
-  }
-  return lista3;
-  
-
-}
-
-
 
 int main(){
   int x;
