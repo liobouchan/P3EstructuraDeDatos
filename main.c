@@ -192,7 +192,6 @@
     }
 
 int main(){
-  int x;
 /*
   int x;
   lista MiLista;
@@ -208,7 +207,7 @@ int main(){
   }
   ImprimirLista(&MiLista); 
 */
-  int opcion,val;
+  int opcion,val,x;
   do{
     puts("Escriba la opcion que desea realizar:");
     puts("1° Concatenar dos listas");
