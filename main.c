@@ -8,7 +8,6 @@
       int boleta;
       struct Alumno *sigAlumno;
     }nodoAlumno;
-
   //Estructura de Listas que contienen Alumno
     typedef struct Lista {
       struct Alumno *start;
@@ -27,24 +26,25 @@
 //Funciones
   //Comparar Listas
     int compararListas(nodoAlumno* lista1,nodoAlumno*lista2){
-    int val=1;
-    nodoAlumno* iterador1=lista1;
-    nodoAlumno* iterador2=lista2;
-    while(iterador1!=NULL && iterador2!=NULL){
-      if(iterador1->boleta!=iterador2->boleta){
+      int val = 1;
+      nodoAlumno *iterador1 = lista1;
+      nodoAlumno *iterador2 = lista2;
+
+    while(iterador1 != NULL && iterador2 != NULL){
+      if(iterador1 -> boleta != iterador2 -> boleta){
         val=0;
         break;
       }
-      iterador1=iterador1->sigAlumno;
-      iterador2=iterador2->sigAlumno;
+      iterador1 = iterador1 -> sigAlumno;
+      iterador2 = iterador2 -> sigAlumno;
     }
-    if((iterador1!=NULL && iterador2==NULL)||(iterador1==NULL && iterador2!=NULL)){
+    if( (iterador1!=NULL && iterador2==NULL) || (iterador1==NULL && iterador2!=NULL) ){
       val=0;
     }
     return val;
     }
   //Concatenar
-    nodoAlumno* concatenar(nodoAlumno* lista1 , nodoAlumno*lista2, int orden){
+    nodoAlumno* concatenar( nodoAlumno *lista1 , nodoAlumno *lista2, int orden ){
     if(orden==1){
       if(lista1==NULL){
         return lista2;
@@ -53,7 +53,7 @@
           while(iterador->sigAlumno!=NULL){
             iterador = iterador -> sigAlumno;
           }
-          iterador->sigAlumno=lista2;%s
+          iterador->sigAlumno=lista2;
           return lista1;
         }
       }
@@ -190,23 +190,78 @@
         free(posicionador);
       }
     }
+  //COSAS
+    int buscarElemento(nodoAlumno*lista1,int num_boleta){
+  nodoAlumno*iterador=lista1;
+  int val=-1;
+  while(iterador!=NULL){
+    if(iterador->boleta==num_boleta){
+      val=1;
+      break;
+    }
+    iterador=iterador->sigAlumno;
+  }
+  return val;
+  
+}
+
+void insertarElemento(nodoAlumno** lista1,int numBoleta){
+    (*lista1)= malloc( sizeof( nodoAlumno ));
+      (*lista1)-> boleta = numBoleta;
+      (*lista1)-> sigAlumno = NULL;
+
+}
+
+nodoAlumno* subLista(nodoAlumno*lista1,nodoAlumno*lista2){
+  nodoAlumno*iterador=lista1;
+  int numBoleta,val;
+  puts("Estos son los elementos de la Lista:");
+  ImprimirLista2(iterador);
+  puts("Elije los elmentos de la sublista");
+  scanf("%d",&numBoleta);
+  setbuf(stdin,NULL);
+  if(buscarElemento(lista1,numBoleta)==1){
+    insertarElemento(&lista2,numBoleta);
+    
+  }else{
+    puts("La boleta no se encuentra en la Lista");
+  }
+  nodoAlumno* iterador2=lista2;
+  puts("Deseas agregar otra boleta?, presione 1 para si");
+  scanf("%d",&val);
+  setbuf(stdin,NULL);
+  while(val==1){
+    puts("Escriba la boleta");
+    scanf("%d",&numBoleta);
+    if(buscarElemento(lista1,numBoleta)==1){
+      insertarElemento(&(iterador2->sigAlumno),numBoleta);
+      
+    }else{
+      puts("La boleta no se encuentra en la Lista");
+    }
+    puts("Deseas agregar otra boleta?, presione 1 para si");
+    scanf("%d",&val);
+    setbuf(stdin,NULL);
+  }
+  return lista2;
+}
 
 int main(){
-/*
-  int x;
-  lista MiLista;
-  InicializarLista( &MiLista );
+  /*
+    int x;
+    lista MiLista;
+    InicializarLista( &MiLista );
 
-  for (x = 0; x < 6; ++x){
-    InsertarAlInicio(&MiLista, x);
-  }
-  ImprimirLista(&MiLista); 
+    for (x = 0; x < 6; ++x){
+      InsertarAlInicio(&MiLista, x);
+    }
+    ImprimirLista(&MiLista); 
 
-  for (x = 0; x < 100; ++x){
-    EliminarListaCompleta(&MiLista);
-  }
-  ImprimirLista(&MiLista); 
-*/
+    for (x = 0; x < 100; ++x){
+      EliminarListaCompleta(&MiLista);
+    }
+    ImprimirLista(&MiLista); 
+  */
   int opcion,val,x;
   do{
     puts("Escriba la opcion que desea realizar:");
@@ -263,7 +318,12 @@ int main(){
             }
           }else{
             if(opcion==5){
-
+              puts("Escriba la primera lista");
+              nodoAlumno* lista1=InsertarAlFinal();
+              nodoAlumno* lista2=NULL;
+              lista2=subLista(lista1,lista2);
+              puts("La sublista generada es:");
+              ImprimirLista2(lista2);
             }else{
               printf("%s\n", "Opcion no valida");
             }
@@ -276,5 +336,4 @@ int main(){
     setbuf(stdin,NULL);
   }while(val==1);
   
-
 }
