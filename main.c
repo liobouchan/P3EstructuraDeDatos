@@ -25,6 +25,34 @@
     void EliminarListaCompleta( Lista *aLista );
 
 //Funciones
+  //Concatenar
+    nodoAlumno* concatenar(nodoAlumno* lista1 , nodoAlumno*lista2, int orden){
+    if(orden==1){
+      if(lista1==NULL){
+        return lista2;
+      }else{
+          nodoAlumno*iterador=lista1;
+          while(iterador->sigAlumno!=NULL){
+            iterador = iterador -> sigAlumno;
+          }
+          iterador->sigAlumno=lista2;%s
+          return lista1;
+        }
+      }
+    if(orden==2){
+      if(lista2==NULL){
+        return lista1;
+      }else{
+          nodoAlumno*iterador=lista2;
+          while(iterador->sigAlumno!=NULL){
+            printf("%d\n", iterador -> boleta);
+            iterador = iterador -> sigAlumno;
+          }
+          iterador->sigAlumno=lista1;
+          return lista2;
+        }
+      }
+    }
   //Inicialisa la lista de structs
     void InicializarLista( Lista *aLista ){
       aLista -> start = NULL;
@@ -65,6 +93,18 @@
       }
       return posicionador;
     }
+  //Invertir Lista
+    void invertirLista(nodoAlumno*lista, Lista *aLista){
+      nodoAlumno *iterador=lista;
+        while(iterador!=NULL){
+          nodoAlumno *posicionador;
+          posicionador = malloc( sizeof( nodoAlumno ));
+          posicionador -> boleta = iterador->boleta;
+          posicionador -> sigAlumno = aLista -> start;
+          aLista -> start = posicionador;
+          iterador=iterador->sigAlumno;
+        }
+    }
   //Imprimir Lista
     void imprimirLista ( Lista *aLista ){
       nodoAlumno *posicionador = aLista -> start;
@@ -91,48 +131,10 @@
     }
 //ERUBEY
 
-  //INvertir Lista
-    void invertirLista(nodoAlumno*lista, Lista *aLista){
-      nodoAlumno *iterador=lista;
-        while(iterador!=NULL){
-          nodoAlumno *posicionador;
-          posicionador = malloc( sizeof( nodoAlumno ));
-          posicionador -> boleta = iterador->boleta;
-          posicionador -> sigAlumno = aLista -> start;
-          aLista -> start = posicionador;
-          iterador=iterador->sigAlumno;
-        }
-    }
 
-  //Concatenar
-  nodoAlumno* concatenar(nodoAlumno* lista1 , nodoAlumno*lista2, int orden){
-  if(orden==1){
-    if(lista1==NULL){
-      return lista2;
-    }else{
-        nodoAlumno*iterador=lista1;
-        while(iterador->sigAlumno!=NULL){
-          iterador = iterador -> sigAlumno;
-        }
-        iterador->sigAlumno=lista2;%s
-        return lista1;
-      }
-    }
-  if(orden==2){
-    if(lista2==NULL){
-      return lista1;
-    }else{
-        nodoAlumno*iterador=lista2;
-        while(iterador->sigAlumno!=NULL){
-          printf("%d\n", iterador -> boleta);
-          iterador = iterador -> sigAlumno;
-        }
-        iterador->sigAlumno=lista1;
-        return lista2;
-      }
-    }
-  }
-  //COmparar Listas
+
+
+  //Comparar Listas
   int compararListas(nodoAlumno* lista1,nodoAlumno*lista2){
   int val=1;
   nodoAlumno* iterador1=lista1;
