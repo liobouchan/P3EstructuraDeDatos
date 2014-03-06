@@ -190,20 +190,21 @@
         free(posicionador);
       }
     }
-  //COSAS
-    int buscarElemento(nodoAlumno*lista1,int num_boleta){
-  nodoAlumno*iterador=lista1;
-  int val=-1;
-  while(iterador!=NULL){
-    if(iterador->boleta==num_boleta){
+  //Buscar Elemento
+  int buscarElemento(nodoAlumno*lista1,int num_boleta){
+    /*Esta funcion buscara que el elemento seleccionado exista
+      lo usaremos en la función sublista*/
+    nodoAlumno*iterador=lista1;
+    int val=-1;
+    while(iterador!=NULL){
+      if(iterador->boleta==num_boleta){
       val=1;
       break;
     }
     iterador=iterador->sigAlumno;
+    }
+    return val;
   }
-  return val;
-  
-}
 
 void insertarElemento(nodoAlumno** lista1,int numBoleta){
     (*lista1)= malloc( sizeof( nodoAlumno ));
