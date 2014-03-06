@@ -13,16 +13,6 @@
       struct Alumno *start;
     }Lista;
 
-//Funciones Prototipo
-  //Inicializar la lista
-    void InicializarLista ( Lista *aLista );
-  //Agregar Valor al inicio
-    void InsertarAlInicio ( Lista *aLista , int boleta );
-  //Imprimir Lista
-    void ImprimirLista ( Lista *aLista );
-  //ELiminar Lista COmpleta
-    void EliminarListaCompleta( Lista *aLista );
-
 //Funciones
   //Comparar Listas
     int compararListas(nodoAlumno* lista1,nodoAlumno*lista2){
@@ -131,8 +121,6 @@
     nodoAlumno* iterador3;
     iterador3=lista3;
     while(iterador1!=NULL || iterador2!=NULL){
-      
-      
       if(iterador2!=NULL){
         iterador3->sigAlumno=malloc( sizeof( nodoAlumno )); 
         iterador3=iterador3->sigAlumno;
@@ -148,9 +136,6 @@
         iterador1=iterador1->sigAlumno;
         iterador3->sigAlumno=NULL;
       }
-      
-      
-      
       }
     return lista3;
       }
@@ -187,6 +172,14 @@
       if( aLista -> start != NULL ){
         nodoAlumno *posicionador = aLista -> start;
         aLista -> start = aLista -> start -> sigAlumno;
+        free(posicionador);
+      }
+    }
+  //Eliminar toda la lista ALUMNO
+    void EliminarListaCompletaA( nodoAlumno **lista ){
+      if( (*lista) -> sigAlumno != NULL ){
+        nodoAlumno *posicionador = (*lista) -> sigAlumno;
+        (*lista) -> sigAlumno = (*lista) -> sigAlumno -> sigAlumno;
         free(posicionador);
       }
     }
@@ -302,6 +295,8 @@ int main(){
           nodoAlumno* lista2=InsertarAlFinal();
           nodoAlumno* lista3=intercalarNodos(lista1,lista2);
           puts("La lista resultante es:");
+          EliminarListaCompletaA(&lista1);
+          EliminarListaCompletaA(&lista2);
           ImprimirLista2(lista3);
   
         }else{
