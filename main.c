@@ -132,7 +132,6 @@
         iterador3->boleta=iterador2->boleta;
         iterador2=iterador2->sigAlumno;
         iterador3->sigAlumno=NULL;
-        
       }
       if(iterador1!=NULL){
         iterador3->sigAlumno=malloc( sizeof( nodoAlumno ));
@@ -141,13 +140,15 @@
         iterador1=iterador1->sigAlumno;
         iterador3->sigAlumno=NULL;
       }
-      }
-    return lista3;
-      }
+    }
+      return lista3;
+    }
   //Invertir Lista
     void invertirLista(nodoAlumno*lista, Lista *aLista){
       nodoAlumno *iterador=lista;
         while(iterador!=NULL){
+          /*La funcion se va a encargar que todo siguiente alumno
+            sea asignado al inicio de la lista hasta que no existan más alumnos*/
           nodoAlumno *posicionador;
           posicionador = malloc( sizeof( nodoAlumno ));
           posicionador -> boleta = iterador->boleta;
