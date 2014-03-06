@@ -175,6 +175,7 @@
     }
   //Eliminar toda la lista
     void EliminarListaCompleta( Lista *aLista ){
+      /*Debemos usar un for para eliminar nodo por nodo y liberar memoria*/
       if( aLista -> start != NULL ){
         nodoAlumno *posicionador = aLista -> start;
         aLista -> start = aLista -> start -> sigAlumno;
