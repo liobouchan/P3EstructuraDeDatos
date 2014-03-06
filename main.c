@@ -15,12 +15,13 @@
 
 //Funciones
   //Comparar Listas
-    int compararListas(nodoAlumno* lista1,nodoAlumno*lista2){
+    int compararListas( nodoAlumno *lista1 , nodoAlumno *lista2 ){
       int val = 1;
       nodoAlumno *iterador1 = lista1;
       nodoAlumno *iterador2 = lista2;
 
     while(iterador1 != NULL && iterador2 != NULL){
+      //Mientras los valores no sean nulos comparamos los valores de boleta
       if(iterador1 -> boleta != iterador2 -> boleta){
         val=0;
         break;
@@ -35,6 +36,10 @@
     }
   //Concatenar
     nodoAlumno* concatenar( nodoAlumno *lista1 , nodoAlumno *lista2, int orden ){
+    /*Si el usuario introduce 1 la primer lista irá primero
+      Por el contrario si el usuario introduce 2, se pone la lista2 primero
+      y el último nodo recibe como siguienteALumno todos los valores de la
+      lista numero 1*/
     if(orden==1){
       if(lista1==NULL){
         return lista2;
