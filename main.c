@@ -205,13 +205,14 @@
     }
     return val;
   }
-
-void insertarElemento(nodoAlumno** lista1,int numBoleta){
+  //InsertarElemento
+  void insertarElemento(nodoAlumno** lista1,int numBoleta){
+    /*Esta función nos sirve para insertar un elemento después de haberlo buscado
+      Como se mostrará en la función subLista*/
     (*lista1)= malloc( sizeof( nodoAlumno ));
-      (*lista1)-> boleta = numBoleta;
-      (*lista1)-> sigAlumno = NULL;
-
-}
+    (*lista1)-> boleta = numBoleta;
+    (*lista1)-> sigAlumno = NULL;
+  }
 
 nodoAlumno* subLista(nodoAlumno*lista1,nodoAlumno*lista2){
   nodoAlumno*iterador=lista1;
