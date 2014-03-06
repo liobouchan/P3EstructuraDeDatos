@@ -213,58 +213,44 @@
     (*lista1)-> boleta = numBoleta;
     (*lista1)-> sigAlumno = NULL;
   }
-
-nodoAlumno* subLista(nodoAlumno*lista1,nodoAlumno*lista2){
-  nodoAlumno*iterador=lista1;
-  int numBoleta,val;
-  puts("Estos son los elementos de la Lista:");
-  ImprimirLista2(iterador);
-  puts("Elije los elmentos de la sublista");
-  scanf("%d",&numBoleta);
-  setbuf(stdin,NULL);
-  if(buscarElemento(lista1,numBoleta)==1){
-    insertarElemento(&lista2,numBoleta);
-    
-  }else{
-    puts("La boleta no se encuentra en la Lista");
-  }
-  nodoAlumno* iterador2=lista2;
-  puts("Deseas agregar otra boleta?, presione 1 para si");
-  scanf("%d",&val);
-  setbuf(stdin,NULL);
-  while(val==1){
-    puts("Escriba la boleta");
+  //Crear una Sublista
+  nodoAlumno* subLista(nodoAlumno*lista1,nodoAlumno*lista2){
+    nodoAlumno*iterador=lista1;
+    int numBoleta,val;
+    puts("Estos son los elementos de la Lista:");
+    ImprimirLista2(iterador);
+    puts("Elije los elmentos de la sublista");
     scanf("%d",&numBoleta);
+    setbuf(stdin,NULL);
     if(buscarElemento(lista1,numBoleta)==1){
-      insertarElemento(&(iterador2->sigAlumno),numBoleta);
-      
+      insertarElemento(&lista2,numBoleta);
     }else{
       puts("La boleta no se encuentra en la Lista");
     }
+    nodoAlumno* iterador2=lista2;
     puts("Deseas agregar otra boleta?, presione 1 para si");
     scanf("%d",&val);
     setbuf(stdin,NULL);
+    while(val==1){
+      puts("Escriba la boleta");
+      scanf("%d",&numBoleta);
+      if(buscarElemento(lista1,numBoleta)==1){
+        insertarElemento(&(iterador2->sigAlumno),numBoleta);
+      }else{
+        puts("La boleta no se encuentra en la Lista");
+      }
+      puts("Deseas agregar otra boleta?, presione 1 para si");
+      scanf("%d",&val);
+      setbuf(stdin,NULL);
+    }
+    return lista2;
   }
-  return lista2;
-}
 
 int main(){
-  /*
-    int x;
-    lista MiLista;
-    InicializarLista( &MiLista );
-
-    for (x = 0; x < 6; ++x){
-      InsertarAlInicio(&MiLista, x);
-    }
-    ImprimirLista(&MiLista); 
-
-    for (x = 0; x < 100; ++x){
-      EliminarListaCompleta(&MiLista);
-    }
-    ImprimirLista(&MiLista); 
-  */
   int opcion,val,x;
+  /*En este main lo principal es el menú de opciones para que el usuario
+    nos indique que operacion quiere realizar y así nosotros poder llamar
+    a las funciones anteriormente desarrolladas*/
   do{
     puts("Escriba la opcion que desea realizar:");
     puts("1° Concatenar dos listas");
@@ -274,6 +260,7 @@ int main(){
     puts("5° Generar subLista");
     scanf("%d",&opcion);
     setbuf(stdin,NULL);
+    /*El menu se realizó con un IF ANIDADO*/
     if(opcion==1){
       int orden;
       puts("Escriba la primera lista");
@@ -339,5 +326,4 @@ int main(){
     scanf("%d",&val);
     setbuf(stdin,NULL);
   }while(val==1);
-  
 }
